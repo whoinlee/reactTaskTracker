@@ -1,5 +1,6 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { useQuery } from 'react-query';
 //-- Components
 import Header from './components/Header';
 import AddTask from './components/AddTask';
@@ -13,35 +14,19 @@ import { TaskType } from './components/DataTypes';
 
 
 //-- moved to db.son
-// const tasksArr:TaskType[] = [
-//   {
-//       "text": "Doctors Appointment",
-//       "day": "Feb 6th at 1:30pm",
-//       "reminder": true,
-//       "id": 1
-//     },
-//   {
-//       "text": "Meeting at School",
-//       "day": "Feb 6th at 1:30pm",
-//       "reminder": true,
-//       "id": 2
-//   },
-//   {
-//       "text": "new task",
-//       "day": "evening",
-//       "reminder": false,
-//       "id": 3
-// }]
-const tasksArr:TaskType[] = [];
+// const tasksArr:TaskType[] = [{ .....  }];
+//
 const API_URL = 'http://localhost:5000/tasks'; //-- through json-server
 
 function App() {
-  const [tasks, setTasks] = useState(tasksArr);
+  const [tasks, setTasks] = useState([] as TaskType[]);
   const [showAddTask, setShowAddTask] = useState(false);
-  useEffect(() => {       //useEffect calling function can't be an async, useEffect(async() => ) (X)
+  // const { data, isLoading, error } = useQuery <TaskType[]>('tasks', getProducts);
+  // console.log(`data: ${data}`);
+  useEffect(() => {       
+    //-- useEffect calling function can't be an async, useEffect(async() => ) (X)
     // const fetchTasks = async() => {
-    //   const data = await(await fetch(API_URL)).json();
-    // }
+    //   const data = await(await fetch(API_URL)).json();}
     // fetchTasks();
     const getTasks = async() => {
       const tasksFromServer = await fetchTasks();
@@ -62,15 +47,13 @@ function App() {
     const data = await res.json();
     //console.log("App:: fetchATask, data is ", data);
     return data;
-  }
+  };
 
   // const addTask = (task:TaskType) => {
-  //   setTasks([...tasks, task]);
-  // };
+  //   setTasks([...tasks, task]) };
   const addTask = async (task:TaskType) => {
     // console.log("App:: addTask, task is ", task);
-    // const res = await fetch(API_URL, {
-    await fetch(API_URL, {
+    const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -78,14 +61,12 @@ function App() {
       body: JSON.stringify(task)
     });
     //-- the following code had some type issue
-    // const data = await res.json();
-    // setTasks([...tasks, data]);
-    setTasks([...tasks, task]);
+    const data = await res.json();
+    setTasks([...tasks, data]);
   };
 
   // const deleteTask = (id:number) => {
-  //   setTasks(tasks.filter((task) => task.id !== id));
-  // };
+  //   setTasks(tasks.filter((task) => task.id !== id)) };
   const deleteTask = async (id:number) => {
     // console.log('App :: deleteTask');
     await fetch(`${API_URL}/${id}`, {
@@ -95,10 +76,8 @@ function App() {
   };
 
   // const toggleReminder = (id:number) => {
-  //   setTasks(tasks.map((task) => 
-  //     (task.id === id) ? {...task, reminder: !task.reminder} : task
-  //   ))
-  // };
+  //   setTasks(tasks.map( (task) => 
+  //     (task.id === id) ? {...task, reminder: !task.reminder} : task )) };
   const toggleReminder = async (id:number) => {
     // console.log('App :: toggleReminder');`
     const taskToToggle = await fetchATask(id);
@@ -131,7 +110,6 @@ function App() {
         </Route>
         <Route path='/about' component={About} />
         <Footer />
-
       </Wrapper>
     </Router>
   );
