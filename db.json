@@ -1,34 +1,34 @@
 {
-    "tasks": [
-      {
-        "text": "Meeting at School",
-        "day": "Feb 6th at 1:30pm",
-        "reminder": true,
-        "id": 2
-      },
-      {
-        "text": "new task",
-        "day": "evening",
-        "reminder": false,
-        "id": 3
-      },
-      {
-        "text": "another task",
-        "day": "this evening",
-        "reminder": false,
-        "id": 4
-      },
-      {
-        "text": "test task",
-        "day": "this evening",
-        "reminder": true,
-        "id": 5
-      },
-      {
-        "text": "task 6",
-        "day": "today",
-        "reminder": true,
-        "id": 6
-      }
-    ]
-  }
+  "tasks": [
+    {
+      "text": "Doctors Appointment",
+      "day": "Feb 6th at 1:30pm",
+      "reminder": true,
+      "id": 1
+    },
+    {
+      "text": "Meeting at School",
+      "day": "Feb 6th at 1:30pm",
+      "reminder": false,
+      "id": 2
+    },
+    {
+      "text": "Food Shopping",
+      "day": "Aug 3 at 2:30pm",
+      "reminder": true,
+      "id": 3
+    },
+    {
+      "text": "Going to the Park",
+      "day": "Aug 1 at 12:00pm",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "Finishing Laundry",
+      "day": "July 23 at 5:30pm",
+      "reminder": true,
+      "id": 285
+    }
+  ]
+}
