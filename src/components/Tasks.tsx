@@ -1,16 +1,21 @@
-import React  from 'react';
+import React, { useContext }  from 'react';
 //-- Components
 import Task from './Task';
+//-- Contexts
+import { TasksContext, Context } from '../contexts/TasksContext';
 //-- Types
-import { TaskType } from './DataTypes';
+// import { TaskType } from '../datatypes/DataTypes';
 
 
 type Props = {
-    tasks: TaskType[];
+    // tasks: TaskType[];
     onDelete: (id:number) => void; 
     onToggle: (id:number) => void;
 }
-const Tasks:React.FC<Props> = ( {tasks, onDelete, onToggle} )  => {
+
+// const Tasks:React.FC<Props> = ( {tasks, onDelete, onToggle} )  => {
+const Tasks:React.FC<Props> = ( {onDelete, onToggle} )  => {
+  const { tasks } = useContext<Context>(TasksContext);
   return (
     <>
     {tasks.map((task, index) => 

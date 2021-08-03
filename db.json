@@ -33,8 +33,20 @@
     {
       "text": "New Task",
       "day": "Today",
-      "reminder": false,
+      "reminder": true,
       "id": 647
+    },
+    {
+      "text": "Test Task",
+      "day": "Tonight",
+      "reminder": true,
+      "id": 110
+    },
+    {
+      "text": "Task #2",
+      "day": "anytime after 7:00 pm today",
+      "reminder": true,
+      "id": 183
     }
   ]
 }

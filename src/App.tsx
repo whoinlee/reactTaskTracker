@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import { useQuery } from 'react-query';
 //-- Components
 import Header from './components/Header';
 import AddTask from './components/AddTask';
 import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import About from './components/About';
+//-- Contexts
+import { TasksContext } from './contexts/TasksContext';
+//-- Types
+import { TaskType } from './datatypes/DataTypes';
 //-- Styles
 import { Wrapper } from './App.styles';
-//-- Types
-import { TaskType } from './components/DataTypes';
 
 
 //-- moved to db.son
@@ -21,8 +22,7 @@ const API_URL = 'http://localhost:5000/tasks'; //-- through json-server
 function App() {
   const [tasks, setTasks] = useState([] as TaskType[]);
   const [showAddTask, setShowAddTask] = useState(false);
-  // const { data, isLoading, error } = useQuery <TaskType[]>('tasks', getProducts);
-  // console.log(`data: ${data}`);
+
   useEffect(() => {       
     //-- useEffect calling function can't be an async, useEffect(async() => ) (X)
     // const fetchTasks = async() => {
@@ -97,20 +97,26 @@ function App() {
 
   return (
     <Router>
-      <Wrapper>
-        <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
-        <Route path='/' >
-          <>
-          {showAddTask && <AddTask addTask={addTask} />}
-          {tasks.length > 0 ? 
-          <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
-          : 'No Tasks To Show'
-          }
-          </>
-        </Route>
-        <Route path='/about' component={About} />
-        <Footer />
-      </Wrapper>
+      
+        <Wrapper>
+          <TasksContext.Provider value={ {tasks, showAddTask} }>
+            {/* <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} showAddTask={showAddTask} /> */}
+            <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} />
+            <Route path='/' >
+              <>
+              {showAddTask && <AddTask addTask={addTask} />}
+              {tasks.length > 0 ? 
+              // <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+              <Tasks onDelete={deleteTask} onToggle={toggleReminder} />
+              : 'No Tasks To Show'
+              }
+              </>
+            </Route>
+            <Route path='/about' component={About} />
+            <Footer />
+          </TasksContext.Provider>
+        </Wrapper>
+      
     </Router>
   );
 }

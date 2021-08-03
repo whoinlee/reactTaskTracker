@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 //-- Styles
 import { Wrapper } from './AddTask.styles'
 //-- Types
-import { TaskType } from './DataTypes';
+import { TaskType } from '../datatypes/DataTypes';
 
 
 type Props = {
