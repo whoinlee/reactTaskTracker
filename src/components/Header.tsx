@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 //-- Components
 import Button from './Button';
 //-- Contexts
-import { TasksContext, Context } from '../contexts/TasksContext';
-//-- Types
-// import { TaskType } from './datatypes/DataTypes';
+import { TaskContext, Context } from '../contexts/TaskContext';
 //-- Styles
 import { Wrapper } from './Header.styles';
 
@@ -12,21 +10,16 @@ import { Wrapper } from './Header.styles';
 type Props = {
     title: string;
     onAdd: () => void;
-    // showAddTask: boolean;
 }
-
-// const Header:React.FC<Props> = ({ title, onAdd, showAddTask }) => {
 const Header:React.FC<Props> = ({ title, onAdd}) => {
-
-  const { showAddTask } = useContext<Context>(TasksContext);
+  const { showAddTask } = useContext<Context>(TaskContext);
 
   return (
     <Wrapper>
       <h1>{title}</h1>
-      <Button text={ showAddTask ? 'Close' : 'Add'} 
+      <Button text={showAddTask ? 'Close' : 'Add'} 
               color={showAddTask ? 'red': 'green'} 
-              onClick={onAdd} 
-      />
+              onClick={onAdd} />
     </Wrapper>
   )
 }

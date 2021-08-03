@@ -7,19 +7,15 @@ import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import About from './components/About';
 //-- Contexts
-import { TasksContext } from './contexts/TasksContext';
+import { TaskContext } from './contexts/TaskContext';
 //-- Types
-import { TaskType } from './datatypes/DataTypes';
+import { TaskType } from './datatypes/TaskType';
 //-- Styles
 import { Wrapper } from './App.styles';
 
 
-//-- moved to db.son
-// const tasksArr:TaskType[] = [{ .....  }];
-//
-const API_URL = 'http://localhost:5000/tasks'; //-- through json-server
-
 function App() {
+  const API_URL = 'http://localhost:5000/tasks'; //-- through json-server
   const [tasks, setTasks] = useState([] as TaskType[]);
   const [showAddTask, setShowAddTask] = useState(false);
 
@@ -49,8 +45,7 @@ function App() {
     return data;
   };
 
-  // const addTask = (task:TaskType) => {
-  //   setTasks([...tasks, task]) };
+  // const addTask = (task:TaskType) => setTasks([...tasks, task]);
   const addTask = async (task:TaskType) => {
     // console.log("App:: addTask, task is ", task);
     const res = await fetch(API_URL, {
@@ -65,8 +60,7 @@ function App() {
     setTasks([...tasks, data]);
   };
 
-  // const deleteTask = (id:number) => {
-  //   setTasks(tasks.filter((task) => task.id !== id)) };
+  // const deleteTask = (id:number) => setTasks(tasks.filter((task) => task.id !== id));
   const deleteTask = async (id:number) => {
     // console.log('App :: deleteTask');
     await fetch(`${API_URL}/${id}`, {
@@ -75,9 +69,9 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  // const toggleReminder = (id:number) => {
-  //   setTasks(tasks.map( (task) => 
-  //     (task.id === id) ? {...task, reminder: !task.reminder} : task )) };
+  // const toggleReminder = (id:number) => { 
+  // setTasks(tasks.map( (task) => 
+  //                     (task.id === id) ? {...task, reminder: !task.reminder} : task )) };
   const toggleReminder = async (id:number) => {
     // console.log('App :: toggleReminder');`
     const taskToToggle = await fetchATask(id);
@@ -97,26 +91,22 @@ function App() {
 
   return (
     <Router>
-      
         <Wrapper>
-          <TasksContext.Provider value={ {tasks, showAddTask} }>
-            {/* <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} showAddTask={showAddTask} /> */}
+          <TaskContext.Provider value={ {tasks, showAddTask} }>
             <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} />
             <Route path='/' >
               <>
               {showAddTask && <AddTask addTask={addTask} />}
               {tasks.length > 0 ? 
-              // <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
               <Tasks onDelete={deleteTask} onToggle={toggleReminder} />
               : 'No Tasks To Show'
               }
               </>
             </Route>
-            <Route path='/about' component={About} />
-            <Footer />
-          </TasksContext.Provider>
+          </TaskContext.Provider>
+          <Route path='/about' component={About} />
+          <Footer />
         </Wrapper>
-      
     </Router>
   );
 }

@@ -27,7 +27,7 @@
     {
       "text": "Finishing Laundry",
       "day": "July 23 at 5:30pm",
-      "reminder": false,
+      "reminder": true,
       "id": 285
     },
     {
