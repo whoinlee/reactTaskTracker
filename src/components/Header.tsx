@@ -4,7 +4,7 @@ import Button from './Button';
 //-- Contexts
 import { TaskContext, Context } from '../contexts/TaskContext';
 //-- Styles
-import { Wrapper } from './Header.styles';
+import { Wrapper } from '../styles/Header.styles';
 
 
 type Props = {

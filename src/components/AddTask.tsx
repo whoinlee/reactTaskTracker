@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 //-- Styles
-import { Wrapper } from './AddTask.styles'
+import { Wrapper } from '../styles/AddTask.styles'
 //-- Types
-import { TaskType } from '../datatypes/TaskType';
+import { TaskType } from '../datatypes/DataType';
 
 
-type Props = {
-  addTask: (task:TaskType) => void;
-}
-const AddTask:React.FC<Props> = ({addTask}) => {
+type Props = { addTask: (task:TaskType) => void; }
+const AddTask = ({ addTask }:Props) => {
   const [text, setText] = useState('');
   const [day, setDay] = useState('');
   const [reminder, setReminder] = useState(false);

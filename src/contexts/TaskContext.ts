@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 //-- Types
-import { TaskType } from '../datatypes/TaskType';
+import { TaskType } from '../datatypes/DataType';
 
 
 export interface Context {

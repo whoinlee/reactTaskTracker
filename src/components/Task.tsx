@@ -1,8 +1,8 @@
 import { FaTimes } from 'react-icons/fa';
 //-- Styles
-import { Wrapper } from './Task.styles';
+import { Wrapper } from '../styles/Task.styles';
 //-- Types
-import { TaskType } from '../datatypes/TaskType';
+import { TaskType } from '../datatypes/DataType';
 
 
 type Props = {

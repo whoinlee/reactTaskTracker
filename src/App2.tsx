@@ -1,0 +1,108 @@
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+//-- Components
+import Header from './components/Header';
+import AddTask from './components/AddTask';
+import Tasks from './components/Tasks';
+import Footer from './components/Footer';
+import About from './components/About';
+//-- Contexts
+import { TaskContext } from './contexts/TaskContext';
+//-- Types
+import { TaskType } from './datatypes/DataType';
+//-- Styles
+import { Wrapper } from './App.styles';
+
+
+function App2() {
+    const API_URL = 'http://localhost:5000/tasks'; //-- through json-server
+    const [tasks, setTasks] = useState([] as TaskType[]);
+    const [showAddTask, setShowAddTask] = useState(false);
+  
+    useEffect(() => {       
+      //-- useEffect calling function can't be an async, useEffect(async() => {}, []) (X)
+      //-----------------------------//
+      // const fetchTasks = async() => {
+      //   const data = await(await fetch(API_URL)).json();}
+      // fetchTasks();
+      //-----------------------------//
+      const getTasks = async() => {
+        const tasksFromServer = await fetchTasks();
+        setTasks(tasksFromServer);
+      }
+      getTasks();
+    }, []);
+  
+    const fetchTasks = async() => {
+      const res = await fetch(API_URL);  
+      const data = await res.json();
+      return data;
+    };
+  
+    const fetchATask = async(id:number) => {
+      const res = await fetch(`${API_URL}/${id}`);  
+      const data = await res.json();
+      //console.log("App:: fetchATask, data is ", data);
+      return data;
+    };
+  
+    const addTask = async (task:TaskType) => {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(task)
+      });
+  
+      const data = await res.json();
+      setTasks([...tasks, data]);
+    };
+  
+    const deleteTask = async (id:number) => {
+      // console.log('App :: deleteTask');
+      await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+      })
+      setTasks(tasks.filter((task) => task.id !== id));
+    };
+  
+    const toggleReminder = async (id:number) => {
+      const taskToToggle = await fetchATask(id);
+      const updTask = {...taskToToggle, reminder: !taskToToggle.reminder};
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updTask)
+      });
+      const data = await res.json();
+      setTasks(tasks.map((task) => 
+        (task.id === id) ? data : task)
+      )
+    };
+
+  return (
+    <Router>
+        <Wrapper>
+          <TaskContext.Provider value={ {tasks, showAddTask} }>
+            <Header title="Task Tracker" onAdd={() => setShowAddTask(!showAddTask)} />
+            <Route path='/' >
+              <>
+              {showAddTask && <AddTask addTask={addTask} />}
+              {tasks.length > 0 ? 
+              <Tasks onDelete={deleteTask} onToggle={toggleReminder} />
+              : 'No Tasks To Show'
+              }
+              </>
+            </Route>
+          </TaskContext.Provider>
+          <Route path='/about' component={About} />
+          <Footer />
+        </Wrapper>
+    </Router>
+  );
+}
+
+export default App2;

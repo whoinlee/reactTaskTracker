@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 //-- Styles
-import { Wrapper } from './Footer.styles';
+import { Wrapper } from '../styles/Footer.styles';
 
 
 const Footer = () => {

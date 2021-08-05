@@ -9,7 +9,7 @@ import About from './components/About';
 //-- Contexts
 import { TaskContext } from './contexts/TaskContext';
 //-- Types
-import { TaskType } from './datatypes/TaskType';
+import { TaskType } from './datatypes/DataType';
 //-- Styles
 import { Wrapper } from './App.styles';
 
@@ -20,10 +20,12 @@ function App() {
   const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {       
-    //-- useEffect calling function can't be an async, useEffect(async() => ) (X)
+    //-- useEffect calling function can't be an async, useEffect(async() => {}, []) (X)
+    //-----------------------------//
     // const fetchTasks = async() => {
     //   const data = await(await fetch(API_URL)).json();}
     // fetchTasks();
+    //-----------------------------//
     const getTasks = async() => {
       const tasksFromServer = await fetchTasks();
       setTasks(tasksFromServer);
@@ -34,7 +36,6 @@ function App() {
   const fetchTasks = async() => {
     const res = await fetch(API_URL);  
     const data = await res.json();
-    //console.log("App:: fetchTasks, data is ", data); ===> return data
     return data;
   };
 
@@ -45,9 +46,7 @@ function App() {
     return data;
   };
 
-  // const addTask = (task:TaskType) => setTasks([...tasks, task]);
   const addTask = async (task:TaskType) => {
-    // console.log("App:: addTask, task is ", task);
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -55,12 +54,11 @@ function App() {
       },
       body: JSON.stringify(task)
     });
-    //-- the following code had some type issue
+
     const data = await res.json();
     setTasks([...tasks, data]);
   };
 
-  // const deleteTask = (id:number) => setTasks(tasks.filter((task) => task.id !== id));
   const deleteTask = async (id:number) => {
     // console.log('App :: deleteTask');
     await fetch(`${API_URL}/${id}`, {
@@ -69,11 +67,7 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  // const toggleReminder = (id:number) => { 
-  // setTasks(tasks.map( (task) => 
-  //                     (task.id === id) ? {...task, reminder: !task.reminder} : task )) };
   const toggleReminder = async (id:number) => {
-    // console.log('App :: toggleReminder');`
     const taskToToggle = await fetchATask(id);
     const updTask = {...taskToToggle, reminder: !taskToToggle.reminder};
     const res = await fetch(`${API_URL}/${id}`, {
