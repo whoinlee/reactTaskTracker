@@ -20,6 +20,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-### NOTE
+## NOTE
 
 This code is originated from http://github.com/bradtraversy/react-crash-2021, and updated to incorporate styled-components, typescript, contextAPI, and useReducer hook.
