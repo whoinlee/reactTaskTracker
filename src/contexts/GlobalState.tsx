@@ -4,21 +4,21 @@ import AppReducer from './AppReducer';
 import { TaskType, State, ContextType } from '../datatypes/DataType';
 
 
+export const InitialState:State = {
+  tasks: [],
+  showAddTask: false,
+  error: ''
+};
 
-//-- create global Context
+//-- create global Context, GlobalContext
 export const GlobalContext = createContext({} as ContextType);
 
-//-- create global Provider component
+
+//-- create global Provider component, GlobalProvider
 type Props = { children?: React.ReactNode };
 export const GlobalProvider = ({ children }:Props) => {
-  const initialState:State = {
-    tasks: [],
-    showAddTask: false,
-    error: ''
-  };
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(AppReducer, InitialState);
   const API_URL = 'http://localhost:5000/tasks';
-
   const getTasks = async() => {
     try {
       const tasksFromServer = await(await fetch(API_URL)).json();
@@ -37,6 +37,7 @@ export const GlobalProvider = ({ children }:Props) => {
   };
 
   const addTask = async(task:TaskType) => {
+    
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -50,6 +51,7 @@ export const GlobalProvider = ({ children }:Props) => {
         type: 'ADD_TASK',
         payload: data
       });
+      console.log("GlobalState :: GlobalProvider, addTask dispatches ADD_TASK, new task ? " + data);
     }
     catch (e) {
       dispatch({

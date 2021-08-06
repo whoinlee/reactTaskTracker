@@ -9,20 +9,20 @@
     {
       "text": "Finishing Laundry",
       "day": "July 23 at 5:30pm",
-      "reminder": true,
-      "id": 285
-    },
-    {
-      "text": "Test Task",
-      "day": "This evening",
       "reminder": false,
-      "id": 450
+      "id": 285
     },
     {
       "text": "Finishing Up React useReducer",
       "day": "by 7:30",
       "reminder": true,
       "id": 133
+    },
+    {
+      "text": "Clean Up",
+      "day": "this afternoon, Aug/4",
+      "reminder": true,
+      "id": 731
     }
   ]
 }

@@ -5,22 +5,24 @@ import Button from './Button';
 import AppReducer from '../contexts/AppReducer';
 import { GlobalContext } from '../contexts/GlobalState';
 //-- Types
-import { State, ContextType } from '../datatypes/DataType';
+import { State } from '../datatypes/DataType';
 //-- Styles
 import { Wrapper } from '../styles/Header.styles';
 
 
-type Props = { title: string }
-const Header = ({ title }:Props) => {
-  const { tasks, showAddTask, error } = useContext<ContextType>(GlobalContext);
+type Props = { title: string; onAddClicked: () => void }
+const Header = ({ title, onAddClicked }:Props) => {
+  const { tasks, showAddTask, error } = useContext(GlobalContext);
   const initialState:State = { tasks, showAddTask, error };
   const [state, dispatch] = useReducer(AppReducer, initialState);
-  
-  const onAddClicked = () => {
+
+  const onClickHandler = () => {
+    onAddClicked();
     dispatch({
       type: 'TOGGLE_SHOW_ADDTASK',
-      payload: !showAddTask
+      payload: !state.showAddTask
     });
+    console.log("Header :: onClickHandler, state.showAddTask? " + state.showAddTask);
   }
 
   return (
@@ -28,7 +30,7 @@ const Header = ({ title }:Props) => {
       <h1>{title}</h1>
       <Button text={state.showAddTask ? 'Close' : 'Add'} 
               color={state.showAddTask ? 'red': 'green'} 
-              onClick={onAddClicked} />
+              onClick={onClickHandler} />
     </Wrapper>
   )
 };

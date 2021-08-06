@@ -24,5 +24,5 @@ yarn-error.log*
 
 
 # old files
-.old.*
-/_archive
+*.old
+/src/_archive

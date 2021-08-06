@@ -3,12 +3,10 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalState';
 //-- Styles
 import { Wrapper } from '../styles/AddTask.styles'
-//-- Types
-import { ContextType } from '../datatypes/DataType';
 
 
 const AddTask = () => {
-  const { showAddTask, addTask } = useContext<ContextType>(GlobalContext);
+  const { addTask } = useContext(GlobalContext);
   const [text, setText] = useState('');
   const [day, setDay] = useState('');
   const [reminder, setReminder] = useState(false);
@@ -25,8 +23,6 @@ const AddTask = () => {
     setReminder(false);
   };
 
-  console.log("AddTask :: showAddTask is " + showAddTask);
-  if (!showAddTask) return (<></>);
   return (
     <Wrapper onSubmit={onSubmit}>
         <div className='form-control'>
