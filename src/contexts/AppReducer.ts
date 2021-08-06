@@ -21,7 +21,6 @@ const AppReducer = (state:State, action:Action) => {
           ...state,
           tasks: [...state.tasks, action.payload]
         };
-      
       case 'DELETE_TASK':
         return {
           ...state,

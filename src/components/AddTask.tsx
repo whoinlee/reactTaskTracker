@@ -15,7 +15,8 @@ const AddTask = () => {
     e.preventDefault();
     if (!text) {
         alert('Please add a task');
-    }
+        return;
+    } 
     const id = Math.floor(Math.random()*1000) + 1;  //TODO: check if unique
     addTask ({ text, day, reminder, id });
     setText('');

@@ -1,4 +1,4 @@
-import { useContext , useEffect }  from 'react';
+import { useContext }  from 'react';
 //-- Components
 import Task from './Task';
 //-- Contexts
@@ -8,10 +8,11 @@ import { GlobalContext } from '../contexts/GlobalState';
 const Tasks = ()  => {
   const { tasks, getTasks } = useContext(GlobalContext);
 
-  useEffect(() => {  
-    getTasks();
-    console.log("Tasks :: ever??");
-  }, []);
+  // useEffect(() => {  
+    if (tasks.length === 0) {
+      getTasks();
+    }
+  // }, []);
 
   return (
     <>

@@ -13,9 +13,7 @@ import { Wrapper } from './App.styles';
 
 
 function App() {
-  // const [state, dispatch] = useReducer(AppReducer, InitialState);
   const [showAddTask, setShowAddTask] = useState(false);
-  // console.log("App :: state.showAddTask ? " + state.showAddTask);
 
   return (
     <Router>
@@ -25,7 +23,6 @@ function App() {
             <Route path='/' >
               <>
                 {showAddTask && <AddTask />}
-                {/* <AddTask /> */}
                 <Tasks />
               </>
             </Route>

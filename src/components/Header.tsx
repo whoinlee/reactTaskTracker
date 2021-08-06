@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from 'react';
+import { useContext, useReducer } from 'react';
 //-- Components
 import Button from './Button';
 //-- Contexts
@@ -22,7 +22,6 @@ const Header = ({ title, onAddClicked }:Props) => {
       type: 'TOGGLE_SHOW_ADDTASK',
       payload: !state.showAddTask
     });
-    console.log("Header :: onClickHandler, state.showAddTask? " + state.showAddTask);
   }
 
   return (

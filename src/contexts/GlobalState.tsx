@@ -22,22 +22,19 @@ export const GlobalProvider = ({ children }:Props) => {
   const getTasks = async() => {
     try {
       const tasksFromServer = await(await fetch(API_URL)).json();
-      console.log("GlobalState :: GlobalProvider, getTasks, tasksFromServer  is " + tasksFromServer );
       dispatch({
         type: 'GET_TASKS',
         payload: tasksFromServer
       });
     } catch (e) {
-      console.log("GlobalState :: GlobalProvider, getTasks, e is " + e);
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: e.data.error  //TODO, trace and double check data type
+        payload: e.message
       });
     }
   };
 
   const addTask = async(task:TaskType) => {
-    
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -51,12 +48,12 @@ export const GlobalProvider = ({ children }:Props) => {
         type: 'ADD_TASK',
         payload: data
       });
-      console.log("GlobalState :: GlobalProvider, addTask dispatches ADD_TASK, new task ? " + data);
+      // console.log("GlobalState :: GlobalProvider, addTask dispatches ADD_TASK, new task ? " + data);
     }
     catch (e) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: e.data.error  //TODO, trace and double check data type
+        payload: e.message
       });
     }
   };
@@ -73,7 +70,7 @@ export const GlobalProvider = ({ children }:Props) => {
     } catch (e) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: e.data.error  //TODO, trace and double check data type
+        payload: e.message
       });
     }
   };
@@ -90,7 +87,6 @@ export const GlobalProvider = ({ children }:Props) => {
         body: JSON.stringify(updTask)
       });
       await res.json();
-      // const data = await res.json();
       dispatch({
         type: 'TOGGLE_REMINDER',
         payload: id
@@ -98,7 +94,7 @@ export const GlobalProvider = ({ children }:Props) => {
     } catch (e) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: e.data.error  //TODO, trace and double check data type
+        payload: e.message
       });
     }
   };

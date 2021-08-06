@@ -1,28 +1,28 @@
 {
   "tasks": [
     {
-      "text": "Going to the Park",
-      "day": "Aug 1 at 12:00pm",
+      "text": "test task",
+      "day": "anytime",
       "reminder": true,
-      "id": 4
+      "id": 658
     },
     {
-      "text": "Finishing Laundry",
-      "day": "July 23 at 5:30pm",
+      "text": "TASK1",
+      "day": "TODAY",
+      "reminder": true,
+      "id": 499
+    },
+    {
+      "text": "Task2",
+      "day": "This Evening",
+      "reminder": true,
+      "id": 615
+    },
+    {
+      "text": "task3",
+      "day": "anytime",
       "reminder": false,
-      "id": 285
-    },
-    {
-      "text": "Finishing Up React useReducer",
-      "day": "by 7:30",
-      "reminder": true,
-      "id": 133
-    },
-    {
-      "text": "Clean Up",
-      "day": "this afternoon, Aug/4",
-      "reminder": true,
-      "id": 731
+      "id": 815
     }
   ]
 }
