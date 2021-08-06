@@ -8,6 +8,6 @@ const About = () => {
       <Link to='/'>Go Back</Link>
     </div>
   )
-}
+};
 
-export default About
+export default About;

@@ -1,27 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 //-- Components
 import Button from './Button';
 //-- Contexts
-import { TaskContext, Context } from '../contexts/TaskContext';
+import AppReducer from '../contexts/AppReducer';
+import { GlobalContext } from '../contexts/GlobalState';
+//-- Types
+import { State, ContextType } from '../datatypes/DataType';
 //-- Styles
 import { Wrapper } from '../styles/Header.styles';
 
 
-type Props = {
-    title: string;
-    onAdd: () => void;
-}
-const Header:React.FC<Props> = ({ title, onAdd}) => {
-  const { showAddTask } = useContext<Context>(TaskContext);
+type Props = { title: string }
+const Header = ({ title }:Props) => {
+  const { tasks, showAddTask, error } = useContext<ContextType>(GlobalContext);
+  const initialState:State = { tasks, showAddTask, error };
+  const [state, dispatch] = useReducer(AppReducer, initialState);
+  
+  const onAddClicked = () => {
+    dispatch({
+      type: 'TOGGLE_SHOW_ADDTASK',
+      payload: !showAddTask
+    });
+  }
 
   return (
     <Wrapper>
       <h1>{title}</h1>
-      <Button text={showAddTask ? 'Close' : 'Add'} 
-              color={showAddTask ? 'red': 'green'} 
-              onClick={onAdd} />
+      <Button text={state.showAddTask ? 'Close' : 'Add'} 
+              color={state.showAddTask ? 'red': 'green'} 
+              onClick={onAddClicked} />
     </Wrapper>
   )
-}
+};
 
-export default Header
+export default Header;

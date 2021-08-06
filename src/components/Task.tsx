@@ -1,21 +1,24 @@
+import { useContext }  from 'react';
 import { FaTimes } from 'react-icons/fa';
 //-- Styles
 import { Wrapper } from '../styles/Task.styles';
 //-- Types
-import { TaskType } from '../datatypes/DataType';
+import { TaskType, ContextType } from '../datatypes/DataType';
+//-- Contexts
+import { GlobalContext } from '../contexts/GlobalState';
 
 
 type Props = {
   task: TaskType;
-  onDelete: (id:number) => void;
-  onToggle: (id:number) => void;
 }
-const Task:React.FC<Props> = ( {task, onDelete, onToggle} ) => {
+const Task = ({ task }:Props) => {
+  const { deleteTask, toggleReminder } = useContext<ContextType>(GlobalContext);
+
   return (
     <Wrapper >
       <div  className={`${task.reminder ? 'reminder': ''}`} 
-            onDoubleClick={e => onToggle(task.id)} >
-        <h3>{task.text}<FaTimes className='faTimes' onClick={(e) => {onDelete(task.id)}}/></h3>
+            onDoubleClick={e => toggleReminder(task.id)} >
+        <h3>{task.text}<FaTimes className='faTimes' onClick={(e) => {deleteTask(task.id)}}/></h3>
         <p>{task.day}</p>
       </div>
     </Wrapper>

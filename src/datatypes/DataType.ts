@@ -3,18 +3,28 @@ export type TaskType = {
     text: string;
     day: string;
     reminder: boolean;
-}
+};
 
 export type State = {
     tasks: TaskType[];
+    error: string;
     showAddTask: boolean;
-    deleteTask: (id:number) => void;
-    addTask: (task:TaskType) => void;
-    toggleReminder: (id:number) => void;
-}
+};
 
 export type Action =  
-| { type: 'DELETE_TASK', payload: number }
+| { type: 'GET_TASKS', payload: TaskType[] }
 | { type: 'ADD_TASK', payload: TaskType }
+| { type: 'DELETE_TASK', payload: number }
 | { type: 'TOGGLE_REMINDER', payload: number }
-// | { type: 'TRANSACTION_ERROR'}
+| { type: 'TOGGLE_SHOW_ADDTASK', payload: boolean }
+| { type: 'TRANSACTION_ERROR', payload: string }
+
+export type ContextType = {
+    tasks:TaskType[],
+    showAddTask: boolean,
+    error: string,
+    getTasks: () => {},
+    addTask: (task:TaskType) => {},
+    deleteTask: (id:number) => {},
+    toggleReminder: (id:number) => {} 
+};

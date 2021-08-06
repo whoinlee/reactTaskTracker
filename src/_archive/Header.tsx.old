@@ -1,0 +1,26 @@
+import React, { useContext } from 'react';
+//-- Components
+import Button from './Button';
+//-- Contexts
+import { TaskContext, ITaskContext } from '../contexts/TaskContext';
+//-- Types
+// import { ContextType } from '../datatypes/DataType';
+//-- Styles
+import { Wrapper } from '../styles/Header.styles';
+
+
+type Props = { title: string; onAddClicked: () => void; }
+const Header = ({ title, onAddClicked }:Props) => {
+  const { showAddTask } = useContext<ITaskContext>(TaskContext);
+
+  return (
+    <Wrapper>
+      <h1>{title}</h1>
+      <Button text={showAddTask ? 'Close' : 'Add'} 
+              color={showAddTask ? 'red': 'green'} 
+              onClick={onAddClicked} />
+    </Wrapper>
+  )
+};
+
+export default Header;

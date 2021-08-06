@@ -1,21 +1,28 @@
-import React, { useContext }  from 'react';
+import { useContext , useEffect }  from 'react';
 //-- Components
 import Task from './Task';
 //-- Contexts
-import { TaskContext, Context } from '../contexts/TaskContext';
+import { GlobalContext } from '../contexts/GlobalState';
+//-- Types
+// import { ContextType } from '../datatypes/DataType';
 
 
-type Props = {
-    onDelete: (id:number) => void; 
-    onToggle: (id:number) => void;
-}
-const Tasks:React.FC<Props> = ( {onDelete, onToggle} )  => {
-  const { tasks } = useContext<Context>(TaskContext);
+const Tasks = ()  => {
+  // const { tasks, deleteTask, toggleReminder } = useContext<ContextType>(GlobalContext);
+  const { tasks, getTasks } = useContext(GlobalContext);
+  useEffect(() => {  
+    getTasks();
+    console.log("Tasks :: ever??");
+  }, []);
+
+  // console.log("Tasks :: typeof(tasks) is " + typeof(tasks));
+  // console.log("Tasks :: typeof(getTasks) is " + typeof(getTasks));
+
   return (
     <>
-      {tasks.map((task, index) => 
-        <Task key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
-      )}
+      {tasks.length > 0 ? 
+        tasks.map((task) => <Task key={task.id} task={task} />) 
+      : 'No Tasks To Show'}
     </>
   )
 }

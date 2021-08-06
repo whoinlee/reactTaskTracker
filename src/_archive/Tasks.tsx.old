@@ -1,0 +1,23 @@
+import React, { useContext }  from 'react';
+//-- Components
+import Task from './Task';
+//-- Contexts
+import { TaskContext, ITaskContext } from '../contexts/TaskContext';
+
+
+type Props = {
+    onDelete: (id:number) => void; 
+    onToggle: (id:number) => void;
+}
+const Tasks = ( {onDelete, onToggle}:Props )  => {
+  const { tasks } = useContext<ITaskContext>(TaskContext);
+  return (
+    <>
+      {tasks.map((task, index) => 
+        <Task key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
+      )}
+    </>
+  )
+}
+
+export default Tasks

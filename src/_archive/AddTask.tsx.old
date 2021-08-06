@@ -1,32 +1,29 @@
-import React, { useState, useContext } from 'react';
-//-- Contexts
-import { GlobalContext } from '../contexts/GlobalState';
+import React, {useState} from 'react';
 //-- Styles
 import { Wrapper } from '../styles/AddTask.styles'
 //-- Types
-import { ContextType } from '../datatypes/DataType';
+import { TaskType } from '../datatypes/DataType';
 
 
-const AddTask = () => {
-  const { showAddTask, addTask } = useContext<ContextType>(GlobalContext);
+type Props = { addTask: (task:TaskType) => void; }
+const AddTask = ({ addTask }:Props) => {
   const [text, setText] = useState('');
   const [day, setDay] = useState('');
   const [reminder, setReminder] = useState(false);
-
   const onSubmit:React.FormEventHandler = (e:React.FormEvent<HTMLInputElement>) => {
+    // console.log("AddTask :: onSubmit");
     e.preventDefault();
     if (!text) {
         alert('Please add a task');
     }
+
     const id = Math.floor(Math.random()*1000) + 1;  //TODO: check if unique
     addTask ({ text, day, reminder, id });
     setText('');
     setDay('');
     setReminder(false);
-  };
+  }
 
-  console.log("AddTask :: showAddTask is " + showAddTask);
-  if (!showAddTask) return (<></>);
   return (
     <Wrapper onSubmit={onSubmit}>
         <div className='form-control'>
