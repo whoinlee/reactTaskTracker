@@ -1,22 +1,10 @@
 {
   "tasks": [
     {
-      "text": "test task",
-      "day": "anytime",
-      "reminder": true,
-      "id": 658
-    },
-    {
       "text": "TASK1",
       "day": "TODAY",
       "reminder": true,
       "id": 499
-    },
-    {
-      "text": "Task2",
-      "day": "This Evening",
-      "reminder": true,
-      "id": 615
     },
     {
       "text": "task3",
@@ -29,6 +17,18 @@
       "day": "by 8pm, on Aug 2",
       "reminder": true,
       "id": 676
+    },
+    {
+      "text": "test task",
+      "day": "today",
+      "reminder": false,
+      "id": 975
+    },
+    {
+      "text": "Task4",
+      "day": "ja;ljdfa;dfads",
+      "reminder": false,
+      "id": 207
     }
   ]
 }

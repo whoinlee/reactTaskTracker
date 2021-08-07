@@ -18,17 +18,18 @@ function App() {
   return (
     <Router>
         <Wrapper>
-          <GlobalProvider >
+          
             <ShowAddTaskContext.Provider value={{showAddTask, setShowAddTask}}>
               <Header title="Task Tracker" />
+            </ShowAddTaskContext.Provider>
+            <GlobalProvider >
               <Route path='/' >
                 <>
                   {showAddTask && <AddTask />}
                   <Tasks />
                 </>
               </Route>
-            </ShowAddTaskContext.Provider>
-          </GlobalProvider>
+            </GlobalProvider>
           <Route path='/about' component={About} />
           <Footer />
         </Wrapper>
