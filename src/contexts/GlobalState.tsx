@@ -14,10 +14,10 @@ export const ShowAddTaskContext = createContext({} as IShowAddTaskContext);
 interface IGlobalContext {
   tasks:TaskType[],
   error: string,
-  getTasks: () => {},
-  addTask: (task:TaskType) => {},
-  deleteTask: (id:number) => {},
-  toggleReminder: (id:number) => {} 
+  getTasks: () => void,
+  addTask: (task:TaskType) => void,
+  deleteTask: (id:number) => void,
+  toggleReminder: (id:number) => void 
 };
 export const GlobalContext = createContext({} as IGlobalContext);
 
