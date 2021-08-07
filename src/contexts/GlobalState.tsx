@@ -60,7 +60,6 @@ export const GlobalProvider = ({ children }:Props) => {
         type: 'ADD_TASK',
         payload: data
       });
-      // console.log("GlobalState :: GlobalProvider, addTask dispatches ADD_TASK, new task ? " + data);
     }
     catch (e) {
       dispatch({
