@@ -17,22 +17,21 @@ function App() {
 
   return (
     <Router>
-        <Wrapper>
-          
-            <ShowAddTaskContext.Provider value={{showAddTask, setShowAddTask}}>
-              <Header title="Task Tracker" />
-            </ShowAddTaskContext.Provider>
-            <GlobalProvider >
-              <Route path='/' >
-                <>
-                  {showAddTask && <AddTask />}
-                  <Tasks />
-                </>
-              </Route>
-            </GlobalProvider>
-          <Route path='/about' component={About} />
-          <Footer />
-        </Wrapper>
+      <Wrapper>
+        <ShowAddTaskContext.Provider value={{showAddTask, setShowAddTask}}>
+          <Header title="Task Tracker" />
+        </ShowAddTaskContext.Provider>
+        <GlobalProvider >
+          <Route path='/' >
+            <>
+              {showAddTask && <AddTask />}
+              <Tasks />
+            </>
+          </Route>
+        </GlobalProvider>
+        <Route path='/about' component={About} />
+        <Footer />
+      </Wrapper>
     </Router>
   );
 }
