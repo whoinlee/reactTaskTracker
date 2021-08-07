@@ -1,22 +1,34 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 //-- Types
-import { TaskType, State, ContextType } from '../datatypes/DataType';
+import { TaskType, State } from '../datatypes/DataType';
 
 
-export const InitialState:State = {
-  tasks: [],
-  showAddTask: false,
-  error: ''
+//-- create Contexts
+interface IShowAddTaskContext {
+  showAddTask: boolean,
+  setShowAddTask: (val:boolean) => void
 };
-
-//-- create global Context, GlobalContext
-export const GlobalContext = createContext({} as ContextType);
+export const ShowAddTaskContext = createContext({} as IShowAddTaskContext);
+//
+interface IGlobalContext {
+  tasks:TaskType[],
+  error: string,
+  getTasks: () => {},
+  addTask: (task:TaskType) => {},
+  deleteTask: (id:number) => {},
+  toggleReminder: (id:number) => {} 
+};
+export const GlobalContext = createContext({} as IGlobalContext);
 
 
 //-- create global Provider component, GlobalProvider
 type Props = { children?: React.ReactNode };
 export const GlobalProvider = ({ children }:Props) => {
+  const InitialState:State = {
+    tasks: [],
+    error: ''
+  };
   const [state, dispatch] = useReducer(AppReducer, InitialState);
   const API_URL = 'http://localhost:5000/tasks';
   const getTasks = async() => {
@@ -100,7 +112,7 @@ export const GlobalProvider = ({ children }:Props) => {
   };
 
   return (
-    <GlobalContext.Provider value={{tasks: state.tasks, showAddTask: state.showAddTask, error: state.error, 
+    <GlobalContext.Provider value={{tasks: state.tasks, error: state.error, 
                                     getTasks, addTask, deleteTask, toggleReminder}} >
         {children}
     </GlobalContext.Provider>

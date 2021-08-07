@@ -21,8 +21,14 @@
     {
       "text": "task3",
       "day": "anytime",
-      "reminder": false,
+      "reminder": true,
       "id": 815
+    },
+    {
+      "text": "new task",
+      "day": "by 8pm, on Aug 2",
+      "reminder": true,
+      "id": 676
     }
   ]
 }

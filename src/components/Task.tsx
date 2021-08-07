@@ -3,16 +3,14 @@ import { FaTimes } from 'react-icons/fa';
 //-- Styles
 import { Wrapper } from '../styles/Task.styles';
 //-- Types
-import { TaskType, ContextType } from '../datatypes/DataType';
+import { TaskType } from '../datatypes/DataType';
 //-- Contexts
 import { GlobalContext } from '../contexts/GlobalState';
 
 
-type Props = {
-  task: TaskType;
-}
+type Props = { task: TaskType; }
 const Task = ({ task }:Props) => {
-  const { deleteTask, toggleReminder } = useContext<ContextType>(GlobalContext);
+  const { deleteTask, toggleReminder } = useContext(GlobalContext);
 
   return (
     <Wrapper >

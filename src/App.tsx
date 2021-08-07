@@ -7,7 +7,7 @@ import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import About from './components/About';
 //-- Contexts
-import { GlobalProvider } from './contexts/GlobalState';
+import { GlobalProvider, ShowAddTaskContext } from './contexts/GlobalState';
 //-- Styles
 import { Wrapper } from './App.styles';
 
@@ -19,13 +19,15 @@ function App() {
     <Router>
         <Wrapper>
           <GlobalProvider >
-            <Header title="Task Tracker" onAddClicked={()=>setShowAddTask(!showAddTask)}/>
-            <Route path='/' >
-              <>
-                {showAddTask && <AddTask />}
-                <Tasks />
-              </>
-            </Route>
+            <ShowAddTaskContext.Provider value={{showAddTask, setShowAddTask}}>
+              <Header title="Task Tracker" />
+              <Route path='/' >
+                <>
+                  {showAddTask && <AddTask />}
+                  <Tasks />
+                </>
+              </Route>
+            </ShowAddTaskContext.Provider>
           </GlobalProvider>
           <Route path='/about' component={About} />
           <Footer />
