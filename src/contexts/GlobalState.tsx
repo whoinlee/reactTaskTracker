@@ -33,6 +33,7 @@ export const GlobalProvider = ({ children }:Props) => {
   const API_URL = 'http://localhost:5000/tasks';
   const getTasks = async() => {
     try {
+      console.log("getTasks ====>");
       const tasksFromServer = await(await fetch(API_URL)).json();
       dispatch({
         type: 'GET_TASKS',

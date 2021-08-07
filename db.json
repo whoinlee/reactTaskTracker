@@ -3,26 +3,14 @@
     {
       "text": "TASK1",
       "day": "TODAY",
-      "reminder": false,
+      "reminder": true,
       "id": 499
     },
     {
-      "text": "task3",
-      "day": "anytime",
+      "text": "TASK4",
+      "day": "Aug 16th, noon",
       "reminder": true,
-      "id": 815
-    },
-    {
-      "text": "new task",
-      "day": "by 8pm, on Aug 2",
-      "reminder": true,
-      "id": 676
-    },
-    {
-      "text": "TASK0",
-      "day": "DAY1",
-      "reminder": false,
-      "id": 399
+      "id": 146
     }
   ]
 }
